@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int n = 9;
+char board[9][9];
+bool is_valid(int row, int col, char c)
+{  
+  for (int i= 0; i < 9; i++)
+  {
+    if (board[i][col] == c)
+      return false;
+    if (board[row][i] == c)
+      return false;
+    if (board[3 * (row / 3) + i/ 3][3 * (col/ 3) + i % 3] == c)
+      return false;
+  }
+  return true;
+}
+bool solve()
+{
+  for (int i = 0; i < n; i++)
+  {
+    for (int j = 0; j < n; j++)
+    { if(board[i][j]=='.')
+      {for (char c = '1'; c <= '9'; c++)
+      {
+        if (is_valid(i, j, c))
+        { 
+          board[i][j] = c;
+          if (solve() == true)
+            return true;
+          else
+            board[i][j] ='.';
+        }
+      }
+      return false;
+      }
+    }
+  }
+  return true;
+}
+int main()
+{ 
+  for (int i = 0; i < n; i++)
+  {
+    for (int j = 0; j < n; j++)
+    {
+      cin>>board[i][j];
+    }
+  }
+  solve();
+  for (int i = 0; i < n; i++)
+  {
+    for (int j = 0; j < n; j++)
+    {
+      cout << board[i][j] << ' ';
+    }
+    cout << '\n';
+  }
+
+  return 0;
+}
