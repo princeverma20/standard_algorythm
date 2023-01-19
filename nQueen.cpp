@@ -12,6 +12,7 @@ bool isSafe(ll i, ll j)
     }
     ll x = i;
     ll y = j;
+    // left  diagonal
     while (x >= 0 && y >= 0)
     {
         if (dp[x][y] == 1)
